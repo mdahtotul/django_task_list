@@ -3,6 +3,7 @@
 {% block title %} TO DO - Home {% endblock title %}
 
 {% block content %}
+<section>
 {% include 'section_title.html' with section_title=sec_title %}
 
 {% if tasks %}
@@ -23,7 +24,7 @@
                 Status
             </th>
             <th scope="col" class="px-6 py-3">
-                Action
+                Actions
             </th>
           </tr>
         </thead>
@@ -46,7 +47,7 @@
               </td>
               {% if item.is_completed %}
               <td class="px-6 py-4">
-                  <span class="inline-block p-4 bg-green-100 text-green-600 px-2 py-1 rounded-full">Complete</span>
+                  <span class="inline-block bg-green-100 text-green-600 px-2 py-1 rounded-full">Complete</span>
               </td>
               {% else %}
               <td class="px-6 py-4">
@@ -56,14 +57,15 @@
 
               <td class="px-6 py-4 mx-auto">
                 <a 
-                  href="#" class="inline-block font-medium text-lg text-center text-blue-600 hover:bg-sky-100 hover:text-sky-600 w-7 h-7 rounded-full"
+                  href="{% url 'edit_task' pk=item.pk %}" 
+                  class="inline-block font-medium text-lg text-center text-blue-600 hover:bg-sky-100 hover:text-sky-600 w-7 h-7 rounded-full"
                 >
                   <span title="Edit" class="text-lg">
                     <i class="fa-regular fa-pen-to-square"></i>
                   </span>
                 </a>
                 <a 
-                  href="#" 
+                  href="{% url 'delete_task' pk=item.pk %}" 
                   class="inline-block font-medium text-lg text-center text-blue-600 hover:bg-red-100 hover:text-red-600 ml-1 w-7 h-7 rounded-full"
                 >
                   <span title="Delete" class="text-lg">
@@ -71,7 +73,7 @@
                   </span>
                 </a>
                 <a 
-                  href="#" 
+                  href="{% url 'done_task' pk=item.pk %}" 
                   class="inline-block font-medium text-lg text-center text-blue-600 hover:bg-green-100 hover:text-green-600 ml-1 w-7 h-7 rounded-full"
                 >
                   <span title="Complete" class="text-lg">
@@ -86,8 +88,35 @@
     </div>
   {% else %}
     <div class="flex justify-center items-center">
-      <h1 class="text-2xl text-gray-500">No Books Found</h1>
+      <h1 class="text-2xl text-gray-500">No Tasks Found</h1>
     </div>
   {% endif %}
+
+  <div class="mt-5 flex items-center justify-between me-8">
+    <div>
+      <a 
+        href="{% url 'add_task' %}" 
+        class="inline-block font-medium text-lg text-center text-blue-600 bg-green-100 hover:bg-green-700 hover:text-green-100 w-7 h-7 rounded-full flex justify-center items-center shadow-lg shadow-blue-500/50 "
+      >
+        <span title="Add Task" class="text-2xl">
+          <i class="fa-regular fa-plus"></i>
+        </span>
+      </a>
+    </div>
+
+    <div>
+      <a 
+        href="{% url 'complete_tasks' %}" 
+        class="inline-block font-medium text-lg text-center text-blue-600 hover:text-green-600 rounded-full flex justify-center items-center shadow-lg shadow-blue-500/50 px-2.5"
+      > 
+        Complete tasks
+        <span title="Add Task" class="text-2xl ms-2">
+          <i class="fa-regular fa-circle-check"></i>
+        </span>
+      </a>
+    </div>
+
+
+  </div>
 </section>
 {% endblock content %}
