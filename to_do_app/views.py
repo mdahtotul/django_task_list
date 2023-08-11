@@ -22,7 +22,7 @@ class HomeView(ListView):
         return ctx
 
 
-class CompletedTaskView(ListView):
+class TaskCompletedView(ListView):
     model = TaskModel
     template_name = "home.html"
     context_object_name = "tasks"
@@ -58,6 +58,27 @@ class TaskUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx.update({"sec_title": "Edit Task"})
+        return ctx
+
+
+class TaskCompleteActionView(UpdateView):
+    model = TaskModel
+    template_name = "complete.html"
+    success_url = reverse_lazy("complete_tasks")
+
+    def get_form(self, form_class=TaskForm):
+        form = super().get_form(form_class)
+        form.fields["taskTitle"].widget.attrs.update({"readonly": True})
+        form.fields["taskDescription"].widget.attrs.update({"readonly": True})
+        return form
+
+    def form_valid(self, form):
+        form.instance.is_completed = True
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({"sec_title": "Complete Task"})
         return ctx
 
 

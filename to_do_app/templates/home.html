@@ -11,7 +11,7 @@
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-200">
           <tr>
-            <th scope="col" class="px-6 py-3">
+            <th scope="col" class="px-6 py-3 text-center">
                 ID
             </th>
             <th scope="col" class="px-6 py-3">
@@ -72,6 +72,7 @@
                     <i class="fa-regular fa-trash-can"></i>
                   </span>
                 </a>
+                {% if not item.is_completed %}
                 <a 
                   href="{% url 'done_task' pk=item.pk %}" 
                   class="inline-block font-medium text-lg text-center text-blue-600 hover:bg-green-100 hover:text-green-600 ml-1 w-7 h-7 rounded-full"
@@ -80,6 +81,7 @@
                     <i class="fa-regular fa-circle-check"></i>
                   </span>
                 </a>
+                {% endif %}
               </td>
             </tr>
             {% endfor %}
@@ -92,7 +94,7 @@
     </div>
   {% endif %}
 
-  <div class="mt-5 flex items-center justify-between me-8">
+  <div class="mt-5 flex items-center justify-between me-2">
     <div>
       <a 
         href="{% url 'add_task' %}" 
