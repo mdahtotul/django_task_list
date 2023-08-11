@@ -107,6 +107,7 @@
     </div>
 
     <div>
+      {% if sec_title == 'Incomplete Tasks' %}
       <a 
         href="{% url 'complete_tasks' %}" 
         class="inline-block font-medium text-lg text-center text-blue-600 hover:text-green-600 rounded-full flex justify-center items-center shadow-lg shadow-blue-500/50 px-2.5"
@@ -116,6 +117,17 @@
           <i class="fa-regular fa-circle-check"></i>
         </span>
       </a>
+      {% else %}
+      <a 
+        href="{% url 'home' %}" 
+        class="inline-block font-medium text-lg text-center text-blue-600 hover:text-red-600 rounded-full flex justify-center items-center shadow-lg shadow-blue-500/50 px-2.5"
+      > 
+        Incomplete tasks
+        <span title="Add Task" class="text-2xl ms-2">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </span>
+      </a>
+      {% endif %}
     </div>
 
 

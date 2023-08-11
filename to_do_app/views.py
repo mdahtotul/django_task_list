@@ -1,7 +1,5 @@
-from typing import Any, Dict
-from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from to_do_app.forms import TaskForm
 from to_do_app.models import TaskModel
@@ -78,7 +76,7 @@ class TaskCompleteActionView(UpdateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx.update({"sec_title": "Complete Task"})
+        ctx.update({"sec_title": "Complete Tasks"})
         return ctx
 
 
